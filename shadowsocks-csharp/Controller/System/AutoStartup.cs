@@ -56,7 +56,7 @@ namespace Shadowsocks.Controller
                     else if (item == "Shadowsocks") // Compatibility with older versions
                     {
                         string value = Convert.ToString(runKey.GetValue(item));
-                        if (path.Equals(value, StringComparison.InvariantCultureIgnoreCase))
+                        if (path == value) // with Caseless.Fody, it's now StringComparison.OrdinalIgnoreCase
                         {
                             runKey.DeleteValue(item);
                             runKey.SetValue(Key, path);
