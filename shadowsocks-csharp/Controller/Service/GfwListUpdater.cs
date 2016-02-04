@@ -42,7 +42,7 @@ namespace Shadowsocks.Controller
                     string[] rules = local.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string rule in rules)
                     {
-                        if (rule.StartsWith("!") || rule.StartsWith("["))
+                        if (rule[0] == '!' || rule[0] == '[')
                             continue;
                         lines.Add(rule);
                     }
@@ -60,7 +60,7 @@ namespace Shadowsocks.Controller
                 if (File.Exists(PACServer.PAC_FILE))
                 {
                     string original = File.ReadAllText(PACServer.PAC_FILE, Encoding.UTF8);
-                    if (original == abpContent)
+                    if (string.Equals(original, abpContent, StringComparison.Ordinal))
                     {
                         UpdateCompleted(this, new ResultEventArgs(false));
                         return;

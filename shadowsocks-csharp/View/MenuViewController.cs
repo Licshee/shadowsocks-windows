@@ -338,7 +338,8 @@ namespace Shadowsocks.View
 
             foreach (MenuItem item in items)
             {
-                if (item.Tag != null && (item.Tag.ToString() == configuration.index.ToString() || item.Tag.ToString() == configuration.strategy))
+                var tag = item.Tag;
+                if ((tag as int?) == configuration.index || (tag as string) == configuration.strategy)
                 {
                     item.Checked = true;
                 }
@@ -651,7 +652,7 @@ namespace Shadowsocks.View
                 I18N.GetString("Please input PAC Url"),
                 I18N.GetString("Edit Online PAC URL"),
                 origPacUrl, -1, -1);
-            if (!string.IsNullOrEmpty(pacUrl) && pacUrl != origPacUrl)
+            if (!string.IsNullOrEmpty(pacUrl) && !string.Equals(pacUrl, origPacUrl, StringComparison.Ordinal))
             {
                 controller.SavePACUrl(pacUrl);
             }

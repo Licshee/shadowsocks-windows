@@ -132,7 +132,7 @@ namespace Shadowsocks.Controller
         private async Task<List<DataList>> ICMPTest(Server server)
         {
             Logging.Debug("Ping " + server.FriendlyName());
-            if (server.server == "") return null;
+            if (string.IsNullOrEmpty(server.server)) return null;
             var ret = new List<DataList>();
             try
             {
