@@ -64,7 +64,7 @@ namespace Shadowsocks.Model
             var availabilityStatisticsType = typeof(AvailabilityStatistics);
             var statisticsData = availabilityStatisticsType.GetNestedType("StatisticsData");
             var properties = statisticsData.GetFields(BindingFlags.Instance | BindingFlags.Public);
-            Calculations = properties.ToDictionary(p => p.Name, _ => (float)0);
+            Calculations = properties.ToDictionary(p => p.Name, _ => (float)0, StringComparer.OrdinalIgnoreCase);
         }
 
         public bool StatisticsEnabled

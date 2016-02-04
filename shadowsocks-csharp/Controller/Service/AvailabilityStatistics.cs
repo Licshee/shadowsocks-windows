@@ -225,7 +225,7 @@ namespace Shadowsocks.Controller
             if (RawStatistics == null) return;
             if (FilteredStatistics == null)
             {
-                FilteredStatistics = new Statistics();
+                FilteredStatistics = new Statistics(StringComparer.OrdinalIgnoreCase);
             }
             foreach (IEnumerable<RawStatisticsData> rawData in RawStatistics.Values)
             {
@@ -298,7 +298,7 @@ namespace Shadowsocks.Controller
                                  {
                                      ServerName = server.Key,
                                      data = server.ToList()
-                                 }).ToDictionary(server => server.ServerName, server => server.data);
+                                 }).ToDictionary(server => server.ServerName, server => server.data, StringComparer.OrdinalIgnoreCase);
             }
             catch (Exception e)
             {

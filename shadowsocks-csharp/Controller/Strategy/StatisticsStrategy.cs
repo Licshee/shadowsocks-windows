@@ -39,7 +39,9 @@ namespace Shadowsocks.Controller.Strategy
 
         private void LoadStatistics()
         {
-            _filteredStatistics = _controller.availabilityStatistics.RawStatistics ?? _filteredStatistics ?? new Dictionary<string, List<AvailabilityStatistics.RawStatisticsData>>();
+            _filteredStatistics 
+                = _controller.availabilityStatistics.RawStatistics ?? _filteredStatistics
+                ?? new Dictionary<string, List<AvailabilityStatistics.RawStatisticsData>>(StringComparer.OrdinalIgnoreCase);
         }
 
         //return the score by data

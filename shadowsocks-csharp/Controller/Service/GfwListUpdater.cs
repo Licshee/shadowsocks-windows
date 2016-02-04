@@ -97,7 +97,7 @@ namespace Shadowsocks.Controller
             List<string> valid_lines = new List<string>(lines.Length);
             foreach (string line in lines)
             {
-                if (line.StartsWith("!") || line.StartsWith("["))
+                if (line[0] == '!' || line[0] == '[')
                     continue;
                 valid_lines.Add(line);
             }

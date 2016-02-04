@@ -44,6 +44,7 @@ namespace Shadowsocks.Encryption
             InitKey(method, password);
         }
 
+        // TODO: possible bad design, try to fix this in the furture
         protected abstract Dictionary<string, int[]> getCiphers();
 
         protected void InitKey(string method, string password)
@@ -59,6 +60,7 @@ namespace Shadowsocks.Encryption
             keyLen = ciphers[method][0];
             ivLen = ciphers[method][1];
 
+            // for the reason, check https://msdn.microsoft.com/en-us/library/ms973919.aspx
             var key = method.ToUpperInvariant() + ":" + password;
             if (!CachedKeys.ContainsKey(key))
             {
