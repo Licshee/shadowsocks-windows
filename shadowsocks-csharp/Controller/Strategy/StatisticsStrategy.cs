@@ -51,8 +51,8 @@ namespace Shadowsocks.Controller.Strategy
             var config = _controller.StatisticsConfiguration;
             List<AvailabilityStatistics.RawStatisticsData> dataList;
             if (_filteredStatistics == null || !_filteredStatistics.TryGetValue(serverName, out dataList)) return 0;
-            var successTimes = (float) dataList.Count(data => data.ICMPStatus.Equals(IPStatus.Success.ToString()));
-            var timedOutTimes = (float) dataList.Count(data => data.ICMPStatus.Equals(IPStatus.TimedOut.ToString()));
+            var successTimes = (float) dataList.Count(data => data.ICMPStatus == IPStatus.Success.ToString());
+            var timedOutTimes = (float) dataList.Count(data => data.ICMPStatus == IPStatus.TimedOut.ToString());
             var statisticsData = new AvailabilityStatistics.StatisticsData
             {
                 PackageLoss = timedOutTimes/(successTimes + timedOutTimes)*100,

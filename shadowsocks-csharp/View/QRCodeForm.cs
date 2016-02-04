@@ -63,6 +63,7 @@ namespace Shadowsocks.View
                 ).ToList();
             listBox1.DataSource = serverDatas;
 
+            // TODO: data extracted from QRCode may contain case-sensitve info, i.e. password
             var selectIndex = serverDatas.FindIndex(serverData => serverData.Key.StartsWith(code));
             if (selectIndex >= 0) listBox1.SetSelected(selectIndex, true);
         }
