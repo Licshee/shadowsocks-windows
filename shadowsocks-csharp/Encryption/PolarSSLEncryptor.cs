@@ -22,12 +22,13 @@ namespace Shadowsocks.Encryption
             InitKey(method, password);
         }
 
-        private static Dictionary<string, int[]> _ciphers = new Dictionary<string, int[]> {
+        private static Dictionary<string, int[]> _ciphers
+            = new Dictionary<string, int[]>(StringComparer.OrdinalIgnoreCase) {
                 {"aes-128-cfb", new int[]{16, 16, CIPHER_AES, PolarSSL.AES_CTX_SIZE}},
                 {"aes-192-cfb", new int[]{24, 16, CIPHER_AES, PolarSSL.AES_CTX_SIZE}},
                 {"aes-256-cfb", new int[]{32, 16, CIPHER_AES, PolarSSL.AES_CTX_SIZE}},
                 {"rc4-md5", new int[]{16, 16, CIPHER_RC4, PolarSSL.ARC4_CTX_SIZE}},
-        };
+            };
 
         public static List<string> SupportedCiphers()
         {

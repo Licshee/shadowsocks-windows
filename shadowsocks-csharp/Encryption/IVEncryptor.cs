@@ -21,9 +21,7 @@ namespace Shadowsocks.Encryption
         public const int AUTH_BYTES = ONETIMEAUTH_BYTES + CLEN_BYTES;
 
         protected static byte[] tempbuf = new byte[MAX_INPUT_SIZE];
-
-        protected Dictionary<string, int[]> ciphers;
-
+        
         private static readonly Dictionary<string, byte[]> CachedKeys = new Dictionary<string, byte[]>();
         protected byte[] _encryptIV;
         protected byte[] _decryptIV;
@@ -50,34 +48,34 @@ namespace Shadowsocks.Encryption
 
         protected void InitKey(string method, string password)
         {
-            method = method.ToLowerInvariant();
-            _method = method;
-            string k = method + ":" + password;
-            ciphers = getCiphers();
-            _cipherInfo = ciphers[_method];
+            var ciphers = getCiphers();
+
+            _cipherInfo = ciphers[method];
             _cipher = _cipherInfo[2];
             if (_cipher == 0)
             {
                 throw new Exception("method not found");
             }
-            keyLen = ciphers[_method][0];
-            ivLen = ciphers[_method][1];
-            if (!CachedKeys.ContainsKey(k))
+            keyLen = ciphers[method][0];
+            ivLen = ciphers[method][1];
+
+            var key = method.ToUpperInvariant() + ":" + password;
+            if (!CachedKeys.ContainsKey(key))
             {
                 lock (CachedKeys)
                 {
-                    if (!CachedKeys.ContainsKey(k))
+                    if (!CachedKeys.ContainsKey(key))
                     {
                         byte[] passbuf = Encoding.UTF8.GetBytes(password);
                         _key = new byte[32];
                         byte[] iv = new byte[16];
                         bytesToKey(passbuf, _key);
-                        CachedKeys[k] = _key;
+                        CachedKeys[key] = _key;
                     }
                 }
             }
             if (_key == null)
-                _key = CachedKeys[k];
+                _key = CachedKeys[key];
         }
 
         protected void bytesToKey(byte[] password, byte[] key)

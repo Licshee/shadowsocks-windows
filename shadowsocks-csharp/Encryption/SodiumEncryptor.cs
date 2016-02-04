@@ -27,11 +27,12 @@ namespace Shadowsocks.Encryption
             InitKey(method, password);
         }
 
-        private static Dictionary<string, int[]> _ciphers = new Dictionary<string, int[]> {
+        private static Dictionary<string, int[]> _ciphers 
+            = new Dictionary<string, int[]>(StringComparer.OrdinalIgnoreCase) {
                 {"salsa20", new int[]{32, 8, CIPHER_SALSA20, PolarSSL.AES_CTX_SIZE}},
                 {"chacha20", new int[]{32, 8, CIPHER_CHACHA20, PolarSSL.AES_CTX_SIZE}},
                 {"chacha20-ietf", new int[]{32, 12, CIPHER_CHACHA20_IETF, PolarSSL.AES_CTX_SIZE}},
-        };
+            };
 
         protected override Dictionary<string, int[]> getCiphers()
         {

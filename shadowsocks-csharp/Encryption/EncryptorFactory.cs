@@ -12,7 +12,7 @@ namespace Shadowsocks.Encryption
 
         static EncryptorFactory()
         {
-            _registeredEncryptors = new Dictionary<string, Type>();
+            _registeredEncryptors = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
             foreach (string method in PolarSSLEncryptor.SupportedCiphers())
             {
                 _registeredEncryptors.Add(method, typeof(PolarSSLEncryptor));
@@ -29,7 +29,6 @@ namespace Shadowsocks.Encryption
             {
                 method = "aes-256-cfb";
             }
-            method = method.ToLowerInvariant();
             Type t = _registeredEncryptors[method];
             ConstructorInfo c = t.GetConstructor(_constructorTypes);
             IEncryptor result = (IEncryptor)c.Invoke(new object[] { method, password, onetimeauth, isudp });
