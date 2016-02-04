@@ -21,7 +21,7 @@ namespace Shadowsocks.Encryption
         public const int AUTH_BYTES = ONETIMEAUTH_BYTES + CLEN_BYTES;
 
         protected static byte[] tempbuf = new byte[MAX_INPUT_SIZE];
-        
+
         private static readonly Dictionary<string, byte[]> CachedKeys = new Dictionary<string, byte[]>();
         protected byte[] _encryptIV;
         protected byte[] _decryptIV;

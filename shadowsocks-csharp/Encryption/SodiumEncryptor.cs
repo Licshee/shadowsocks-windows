@@ -27,7 +27,7 @@ namespace Shadowsocks.Encryption
             InitKey(method, password);
         }
 
-        private static Dictionary<string, int[]> _ciphers 
+        private static Dictionary<string, int[]> _ciphers
             = new Dictionary<string, int[]>(StringComparer.OrdinalIgnoreCase) {
                 {"salsa20", new int[]{32, 8, CIPHER_SALSA20, PolarSSL.AES_CTX_SIZE}},
                 {"chacha20", new int[]{32, 8, CIPHER_CHACHA20, PolarSSL.AES_CTX_SIZE}},
@@ -53,7 +53,7 @@ namespace Shadowsocks.Encryption
 
             // I'm tired. just add a big lock
             // let's optimize for RAM instead of CPU
-            lock(sodiumBuf)
+            lock (sodiumBuf)
             {
                 if (isCipher)
                 {

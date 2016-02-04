@@ -134,7 +134,8 @@ namespace Shadowsocks.Controller
             Logging.Debug("Ping " + server.FriendlyName());
             if (server.server == "") return null;
             var ret = new List<DataList>();
-            try {
+            try
+            {
                 var IP = Dns.GetHostAddresses(server.server).First(ip => (ip.AddressFamily == AddressFamily.InterNetwork || ip.AddressFamily == AddressFamily.InterNetworkV6));
                 var ping = new Ping();
 
@@ -161,7 +162,8 @@ namespace Shadowsocks.Controller
                         Logging.LogUsefulException(e);
                     }
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Logging.Error($"An exception occured while eveluating {server.FriendlyName()}");
                 Logging.LogUsefulException(e);
@@ -265,16 +267,19 @@ namespace Shadowsocks.Controller
                 Logging.Debug($"loading statistics from {path}");
                 if (!File.Exists(path))
                 {
-                    try {
+                    try
+                    {
                         using (FileStream fs = File.Create(path))
                         {
                             //do nothing
                         }
-                    }catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
                         Logging.LogUsefulException(e);
                     }
-                    if (!File.Exists(path)) { 
+                    if (!File.Exists(path))
+                    {
                         Console.WriteLine($"statistics file does not exist, try to reload {RetryInterval / 60 / 1000} minutes later");
                         _timer.Change(RetryInterval, Interval);
                         return;

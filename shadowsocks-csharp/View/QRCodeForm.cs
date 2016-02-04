@@ -32,8 +32,8 @@ namespace Shadowsocks.View
             string qrText = ssconfig;
             QRCode code = ZXing.QrCode.Internal.Encoder.encode(qrText, ErrorCorrectionLevel.M);
             ByteMatrix m = code.Matrix;
-            int blockSize = Math.Max(pictureBox1.Height/m.Height, 1);
-            Bitmap drawArea = new Bitmap((m.Width*blockSize), (m.Height*blockSize));
+            int blockSize = Math.Max(pictureBox1.Height / m.Height, 1);
+            Bitmap drawArea = new Bitmap((m.Width * blockSize), (m.Height * blockSize));
             using (Graphics g = Graphics.FromImage(drawArea))
             {
                 g.Clear(Color.White);
@@ -45,7 +45,7 @@ namespace Shadowsocks.View
                         {
                             if (m[row, col] != 0)
                             {
-                                g.FillRectangle(b, blockSize*row, blockSize*col, blockSize, blockSize);
+                                g.FillRectangle(b, blockSize * row, blockSize * col, blockSize, blockSize);
                             }
                         }
                     }

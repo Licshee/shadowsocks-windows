@@ -76,7 +76,7 @@ namespace Shadowsocks.Controller
                 if (runKey != null)
                 {
                     try { runKey.Close(); }
-                    catch(Exception e)
+                    catch (Exception e)
                     { Logging.LogUsefulException(e); }
                 }
             }
