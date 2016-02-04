@@ -50,7 +50,7 @@ namespace Shadowsocks.Encryption
 
         protected void InitKey(string method, string password)
         {
-            method = method.ToLower();
+            method = method.ToLowerInvariant();
             _method = method;
             string k = method + ":" + password;
             ciphers = getCiphers();
