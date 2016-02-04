@@ -37,9 +37,7 @@ namespace ZXing.Common
       private const string EUC_JP = "EUC-JP";
       private const string UTF8 = "UTF-8";
       private const string ISO88591 = "ISO-8859-1";
-      private static readonly bool ASSUME_SHIFT_JIS =
-         string.Equals(SHIFT_JIS, PLATFORM_DEFAULT_ENCODING, StringComparison.OrdinalIgnoreCase) ||
-         string.Equals(EUC_JP, PLATFORM_DEFAULT_ENCODING, StringComparison.OrdinalIgnoreCase);
+      private static readonly bool ASSUME_SHIFT_JIS =  (SHIFT_JIS == PLATFORM_DEFAULT_ENCODING) || (EUC_JP == PLATFORM_DEFAULT_ENCODING);
 
       /// <summary>
       /// Guesses the encoding.
